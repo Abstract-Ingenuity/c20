@@ -1,14 +1,25 @@
 ---
-title: Animation data
+title: JMA
 stub: true
 about: 'resource:Animation data'
 keywords:
   - jma
   - animation
 thanks:
+  "Abstract Ingenuity": Documentation for types of animation
   General_101: Documentation on animation types
   ODX: JMO frames
 ---
+**Jointed Model Animation** (JMA) is a text-based intermediate file format used to import animations for Halo. Each file contains information about the bones involved in an animation, and the transforms of those bones for each frame of the animation.
+
+Animations can be exported as JMA from 3ds Max and from Blender using community-made exporters. Animations exported as [FBX](~fbx) can be converted to JMA using Tool.
+
+Use Tool to compile animation data from JMA files into a tag.
+
+Unlike the other file formats used for Halo, the extension of a JMA file is not always JMA. The extension depends on the type of animation it is intended to be. The data written inside the file is not affected by that. The extension is for Tool. Tool processes the file differently according to the extension.
+
+JMA was replaced by Granny (GR2) starting with Halo: Reach.
+
 The [HEK](~custom-edition#halo-editing-kit) uses several file types as intermediate representations of animation data. These files provide a common target for exporters like [Bluestreak](~) and [Halo Asset Blender Development Toolset](~halo-asset-blender-development-toolset), and can then be converted to [model_animations](~) tags by [Tool](~h1-tool) for use in Halo.
 
 # JMA (Base)
