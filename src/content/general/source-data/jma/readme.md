@@ -1,6 +1,6 @@
 ---
 title: JMA
-stub: true
+stub: false
 about: 'resource:Animation data'
 keywords:
   - jma
@@ -10,35 +10,31 @@ thanks:
   General_101: Documentation on animation types
   ODX: JMO frames
 ---
-**Jointed Model Animation** (JMA) is a text-based intermediate file format used to import animations for Halo. Each file contains information about the bones involved in an animation, and the transforms of those bones for each frame of the animation.
+**Jointed Model Animation** (JMA) is an intermediate file format for animation in Halo. Unlike most file formats, there are different extensions, for different types of animation. The data written inside the file will be the same, regardless of the extension. The file has information about the animation data at the top, followed by the position, rotation, and scale of each node for each frame.
 
-Animations can be exported as JMA from 3ds Max and from Blender using community-made exporters. Animations exported as [FBX](~fbx) can be converted to JMA using Tool.
+Animation can be exported as JMA using community-made tools, such as [Bluestreak](~) for 3ds Max, and the [Halo Asset Blender Development Toolset](~) for Blender. [Tool](~h1-tool) can convert animation exported as [FBX](~) to JMA. Animation data exported as JMA can be compiled into a [model_animations](~) tag for Halo 1, or into a [model_animation_graph](~h2/) tag for later games, such as Halo 2 and Halo 3.
 
-Use Tool to compile animation data from JMA files into a tag.
+JMA was used for first-person animation in Halo: Reach, but for everything else, Granny (GR2) was used instead. GR2 fully replaced JMA in Halo 4.
 
-Unlike the other file formats used for Halo, the extension of a JMA file is not always JMA. The extension depends on the type of animation it is intended to be. The data written inside the file is not affected by that. The extension is for Tool. Tool processes the file differently according to the extension.
+# Types of animation
 
-JMA was replaced by Granny (GR2) starting with Halo: Reach.
+## JMM
+JMM is for base animation with no frame info. This is used for actions that do not need to move the object from one place to another, such as breathing when standing, entering a vehicle, and first-person animations.
 
-The [HEK](~custom-edition#halo-editing-kit) uses several file types as intermediate representations of animation data. These files provide a common target for exporters like [Bluestreak](~) and [Halo Asset Blender Development Toolset](~halo-asset-blender-development-toolset), and can then be converted to [model_animations](~) tags by [Tool](~h1-tool) for use in Halo.
+## JMA
+JMA is for base animation with frame info for change in X and Y coordinates of position. This is used for actions that move the object from one place to another, such as diving, running, and close range attacks that involve charging forward.
 
-# JMA (Base)
-This is what a lot of animations will end up as. It is a default animation type that stores data necessary for movement, such as a [biped](~h1/tags/object/unit/biped) walking animation.
+## JMT
+JMT is like JMM with frame info for change in rotation around Z axis. This is used for turning left or right when standing, turning around when surprised, and so on.
 
-# JMM (Base)
-...
+## JMZ
+JMZ is like JMT with frame info for change in Z coordinate of position. This is used for leaping to an elevated position.
 
-# JMW (Base)
-These animations are world-relative. The origin of the animation is the 0, 0, 0 location of the level.
+## JMW
+JMW is for base animation that relative to the world, at the origin of the level. This can be used for precise movement of a dropship in a specific level.
 
-# JMZ (Base)
-...
-
-# JMT (Base)
-...
-
-# JMO (Overlay)
-Overlay animations add extra blended movement to base animations. Examples include the shifting of vehicle passengers from acceleration, 3rd person aiming poses, or 3rd person firing effects. The requirements for these animations depends on how they will be used:
+## JMO
+JMO is for overlay animation added on top of base animation. This is used for aiming poses, recoil from firing a weapon, and rotation of the wheels on a car.
 
 ## First person weapon overlays
 When the player moves and aims, the first person weapon model can react to give a sense of weight and realism. This overlay animation is used to define the default and extreme location and orientations of the weapon under movement and aiming.
@@ -56,5 +52,5 @@ When the player moves and aims, the first person weapon model can react to give 
 | 8 | Look down
 | 9 | Fully automatic firing
 
-# JMR (Replacement)
-This animation type removes the original animation for the nodes that are animated and plays it's own animation for it. An example for a replacement is a reload animation where you want to make sure the node positions are proper at each part of the reload. In that case you would only animate the upper body, so the lower parts can keep their original base animation that for instance still is a running animation.
+## JMR (Replacement)
+JMR is for replacement animation that partially animates the object. This is used for reloading which involves only the nodes of the upper body, allowing the legs to be animated by a different animation
